@@ -1,1 +1,27 @@
-
+:root{--bg:#0b0f14;--panel:#111826;--panel2:#16202f;--accent:#00d1b2;
+       --text:#e6edf3;--muted:#8b98a8;--danger:#ff5c7a;--ok:#2ecc71;--warn:#f5a623;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Roboto,sans-serif;display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--panel);padding:20px;border-right:1px solid #1f2a3a;position:sticky;top:0;height:100vh}
+.brand{font-size:20px;margin-bottom:20px;font-weight:800;letter-spacing:1px}
+.brand span{color:var(--accent)}
+nav a{display:block;color:var(--muted);text-decoration:none;padding:10px 8px;border-radius:8px;margin-bottom:2px}
+nav a:hover{background:var(--panel2);color:var(--text)}
+.content{flex:1;padding:30px;max-width:calc(100vw - 220px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:var(--panel);border:1px solid #1f2a3a;border-radius:14px;padding:20px}
+.card h3{margin:0 0 8px;color:var(--muted);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.stat{font-size:26px;font-weight:700}
+button,.btn{background:var(--accent);color:#001f1a;border:0;padding:9px 16px;border-radius:8px;font-weight:600;cursor:pointer}
+button.secondary{background:var(--panel2);color:var(--text);border:1px solid #2c3a4f}
+button.danger{background:var(--danger);color:#fff}
+input,select,textarea{background:var(--panel2);border:1px solid #2c3a4f;color:var(--text);
+       padding:9px 12px;border-radius:8px;width:100%;font-family:inherit}
+.status-running{color:var(--ok)} .status-stopped{color:var(--muted)} .status-crashed{color:var(--danger)}
+#toast-container{position:fixed;right:20px;bottom:20px;z-index:999}
+.toast{background:var(--panel2);border-left:4px solid var(--accent);padding:10px 14px;margin-top:8px;border-radius:8px}
+.toast.error{border-color:var(--danger)}
+.term{background:#02060c;font-family:'Fira Code',Consolas,monospace;color:#c9f7e6;
+      padding:14px;border-radius:10px;height:420px;overflow:auto;font-size:13px;white-space:pre-wrap}
+@media(max-width:768px){body{flex-direction:column}.sidebar{width:100%;height:auto;position:relative}
+       .content{max-width:100%;padding:16px}}
