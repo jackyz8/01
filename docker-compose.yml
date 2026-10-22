@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  glory-host:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - SANDBOX_MODE=docker
+      - DATA_DIR=/data
+    volumes:
+      - ./data:/data
+      - /var/run/docker.sock:/var/run/docker.sock   # required so manager can spawn project containers
+    restart: unless-stopped
