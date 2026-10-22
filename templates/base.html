@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}GLORY HOST{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">⚡ GLORY<span>HOST</span></div>
+    <nav>
+      <a href="/dashboard">📊 Overview</a>
+      <a href="/dashboard#projects">📦 My Projects</a>
+      <a href="/dashboard#create">➕ Create Project</a>
+      <a href="/dashboard#files">📁 File Manager</a>
+      <a href="/dashboard#console">⌨️ Console</a>
+      <a href="/dashboard#logs">📟 Logs</a>
+      <a href="/dashboard#backups">💾 Backups</a>
+      <a href="/dashboard#account">👤 Account</a>
+      <a href="/docs">📘 Docs</a>
+      <a href="#" onclick="logout(event)">🚪 Logout</a>
+    </nav>
+  </aside>
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+  <div id="toast-container"></div>
+  <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="card" style="max-width:420px;margin:80px auto">
+  <h2>Create account</h2>
+  <form id="f">
+    <label>Email<input type="email" id="email" required></label>
+    <label>Password (min 8)<input type="password" id="password" minlength="8" required></label>
+    <button type="submit" style="width:100%">Register</button>
+  </form>
+  <p class="muted">An administrator must approve your account before you can log in.</p>
+</div>
+<script>
+document.getElementById("f").addEventListener("submit", async e => {
+  e.preventDefault();
+  try{
+    await api("/api/auth/register", {method:"POST", body:JSON.stringify({
+      email:document.getElementById("email").value,
+      password:document.getElementById("password").value,
+    })});
+    toast("Registered. Wait for admin approval.");
+    setTimeout(()=>location.href="/login", 1500);
+  }catch(err){ toast(err.message, true); }
+});
+</script>
+{% endblock %}

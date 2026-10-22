@@ -1,1 +1,20 @@
-
+{% extends "base.html" %}
+{% block content %}
+<h1>👑 Admin</h1>
+<div class="card">
+  <h3>Users</h3>
+  <table id="users-table" style="width:100%;border-collapse:collapse">
+    <thead><tr><th>ID</th><th>Email</th><th>Admin</th><th>Approved</th><th>Banned</th><th>Limit</th><th>Actions</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</div>
+<div class="card">
+  <h3>All projects</h3>
+  <ul id="all-projects"></ul>
+</div>
+<div class="card">
+  <h3>Audit log (last 200)</h3>
+  <ul id="audit"></ul>
+</div>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

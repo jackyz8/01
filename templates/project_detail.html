@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}{{ pid }} · Project{% endblock %}
+{% block content %}
+<h1><span id="p-name">…</span> <span id="p-status" class="status-…"></span></h1>
+<div class="grid">
+  <div class="card"><h3>Uptime</h3><div class="stat" id="p-uptime">-</div></div>
+  <div class="card"><h3>CPU</h3><div class="stat" id="p-cpu">-</div></div>
+  <div class="card"><h3>RAM</h3><div class="stat" id="p-mem">-</div></div>
+  <div class="card"><h3>Last error</h3><div id="p-lasterr" style="color:var(--danger)">—</div></div>
+</div>
+
+<div class="card">
+  <button id="btn-start">▶ Start</button>
+  <button id="btn-stop">⏹ Stop</button>
+  <button id="btn-restart">🔄 Restart</button>
+  <button id="btn-delete" class="danger">🗑 Delete project</button>
+</div>
+
+<div class="card">
+  <h3>Upload project</h3>
+  <form id="upload-form">
+    <input type="file" id="upload-input" accept=".zip,.py" required>
+    <button type="submit">Upload</button>
+    <progress id="upload-progress" style="display:none;width:100%"></progress>
+  </form>
+</div>
+
+<div class="card">
+  <h3>Settings</h3>
+  <label>Startup file: <select id="startup-select"></select></label>
+  <label>Arguments: <input id="args-input"></label>
+  <label>Scheduled restart every N hours:
+    <input id="sched" type="number" min="0" max="168" value="0">
+  </label>
+  <label><input type="checkbox" id="auto-restart"> Auto-restart on crash</label>
+  <button id="save-settings">Save settings</button>
+</div>
+
+<div class="card">
+  <h3>Live logs</h3>
+  <button id="btn-logs">▶ Connect</button>
+  <button id="btn-download-logs">⬇ Download</button>
+  <button id="btn-clear-logs">Clear view</button>
+  <pre id="logs" class="term"></pre>
+</div>
+
+<div class="card">
+  <h3>Console (stdin)</h3>
+  <form id="console-form" style="display:flex;gap:8px">
+    <input id="console-input" placeholder="Send text to process stdin…">
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+<div class="card">
+  <h3>Packages <small id="req-exists"></small></h3>
+  <input id="pip-input" placeholder="e.g. requests aiohttp">
+  <button id="btn-pip-install">Install</button>
+  <button id="btn-pip-upgrade">Upgrade</button>
+  <button id="btn-pip-uninstall">Uninstall</button>
+  <button id="btn-pip-requirements">Install requirements.txt</button>
+  <pre id="pip-output" class="term" style="height:220px"></pre>
+  <h4>Installed</h4><ul id="pip-installed"></ul>
+</div>
+
+<div class="card">
+  <h3>Environment variables</h3>
+  <form id="env-form">
+    <input id="env-key" placeholder="KEY">
+    <input id="env-value" placeholder="value" type="password">
+    <button type="submit">Add</button>
+  </form>
+  <ul id="env-list"></ul>
+</div>
+
+<div class="card">
+  <h3>Backups</h3>
+  <button id="btn-backup-now">💾 Backup now</button>
+  <ul id="backups"></ul>
+</div>
+
+<div class="card">
+  <h3>Files <small id="fm-path">/</small></h3>
+  <form id="fm-upload-form" style="display:flex;gap:8px">
+    <input type="file" id="fm-upload-input"><button>Upload</button>
+  </form>
+  <ul id="fm-list"></ul>
+  <div id="fm-editor" style="display:none">
+    <h4 id="fm-editor-path"></h4>
+    <textarea id="fm-editor-text" rows="14" style="width:100%"></textarea>
+    <button id="fm-editor-save">Save</button>
+  </div>
+</div>
+
+<script>window.PROJECT_ID = {{ pid }};</script>
+<script src="{{ url_for('static', filename='js/project.js') }}"></script>
+{% endblock %}
